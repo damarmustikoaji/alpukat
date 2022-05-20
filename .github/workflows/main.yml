@@ -42,4 +42,4 @@ jobs:
         && rm google-chrome*.deb
     - name: Test with behave
       run: |
-        python TestRun_SUITE.file.py
+        python TestRun_SUITE.py

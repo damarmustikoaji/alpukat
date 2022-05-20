@@ -37,13 +37,13 @@ class function():
             #options.add_argument('disable-popup-blocking')
             if platform.system() == "Darwin":
                 options.add_argument("--kiosk")
-                driver = webdriver.Chrome(chrome_options=options, executable_path='driver/mac/chromedriver')
+                driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver')
             elif platform.system() == "Windows":
                 options.add_argument("--start-maximized")
                 driver = webdriver.Chrome(chrome_options=options, executable_path='driver/windows/chromedriver.exe')
             elif platform.system() == "Linux":
                 options.add_argument("--kiosk")
-                driver = webdriver.Chrome(chrome_options=options, executable_path='driver/linux/chromedriver')
+                driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver')
         elif var.BROWSER == "Firefox":
             print ("Firefox")
             if var.BROWSER_MODE == "headless":

@@ -4,6 +4,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 import platform
 
@@ -20,30 +22,36 @@ class function():
     try:
         if var.BROWSER == "Chrome":
             print ("Chrome")
-            options = webdriver.ChromeOptions()
-            #block permission webnotif
-            prefs = {"profile.default_content_setting_values.notifications" : 2}
-            options.add_experimental_option("prefs",prefs)
-            if var.BROWSER_MODE == "headless":
-                options.add_argument('headless')
-            elif var.BROWSER_MODE == "mobile":
-                mobile_emulation = {
-                "deviceName": "iPhone 5"
-                #"deviceName": "iPhone 6 Plus"
-                }
-                options.add_experimental_option("mobileEmulation", mobile_emulation)
-            #options.add_argument('disable-gpu')
-            #options.add_argument('no-sandbox')
-            #options.add_argument('disable-popup-blocking')
-            if platform.system() == "Darwin":
-                options.add_argument("--kiosk")
-                driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver')
-            elif platform.system() == "Windows":
-                options.add_argument("--start-maximized")
-                driver = webdriver.Chrome(chrome_options=options, executable_path='driver/windows/chromedriver.exe')
-            elif platform.system() == "Linux":
-                options.add_argument("--kiosk")
-                driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver')
+            chromeDriver=Service('driver/linux/chromedriver_linux64')
+            opts = Options()
+            opts.headless = True
+
+            driver = webdriver.Chrome(options=opts, service=chromeDriver)
+            
+#             options = webdriver.ChromeOptions()
+#             #block permission webnotif
+#             prefs = {"profile.default_content_setting_values.notifications" : 2}
+#             options.add_experimental_option("prefs",prefs)
+#             if var.BROWSER_MODE == "headless":
+#                 options.add_argument('headless')
+#             elif var.BROWSER_MODE == "mobile":
+#                 mobile_emulation = {
+#                 "deviceName": "iPhone 5"
+#                 #"deviceName": "iPhone 6 Plus"
+#                 }
+#                 options.add_experimental_option("mobileEmulation", mobile_emulation)
+#             #options.add_argument('disable-gpu')
+#             #options.add_argument('no-sandbox')
+#             #options.add_argument('disable-popup-blocking')
+#             if platform.system() == "Darwin":
+#                 options.add_argument("--kiosk")
+#                 driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver')
+#             elif platform.system() == "Windows":
+#                 options.add_argument("--start-maximized")
+#                 driver = webdriver.Chrome(chrome_options=options, executable_path='driver/windows/chromedriver.exe')
+#             elif platform.system() == "Linux":
+#                 options.add_argument("--kiosk")
+#                 driver = webdriver.Chrome(chrome_options=options, executable_path='/usr/local/bin/chromedriver')
         elif var.BROWSER == "Firefox":
             print ("Firefox")
             if var.BROWSER_MODE == "headless":

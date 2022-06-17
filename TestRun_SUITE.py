@@ -4,6 +4,10 @@
 import unittest
 import os
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+
 from PUBLIC_FUNCTION import FUNC_LIBRARY
 from PUBLIC_FUNCTION.ExtentHTMLTestRunner import HTMLTestRunner
 
@@ -15,7 +19,13 @@ from TESTSUITE.ThankYou import thank_you_test
 direct = os.getcwd()
 
 class RalaliTest(unittest.TestCase):
-    driver = FUNC_LIBRARY.function.driver
+#     driver = FUNC_LIBRARY.function.driver
+    chromeDriver=Service('./driver/linux/chromedriver_linux64')
+    opts = Options()
+    opts.headless = True
+    
+    driver = webdriver.Chrome(options=opts, service=chromeDriver)
+
 
     def test_main(self):
 

@@ -17,15 +17,15 @@ class function():
     print('Importing Function Lib')
     var     = variables.Variables
     options = Options()
+    
+    chromeDriver=Service('driver/linux/chromedriver_linux64')
+    opts = Options()
+    opts.headless = True
 
     print (platform.system())
     try:
         if var.BROWSER == "Chrome":
             print ("Chrome")
-            chromeDriver=Service('driver/linux/chromedriver_linux64')
-            opts = Options()
-            opts.headless = True
-
             driver = webdriver.Chrome(options=opts, service=chromeDriver)
             
 #             options = webdriver.ChromeOptions()
